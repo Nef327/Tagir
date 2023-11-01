@@ -3,13 +3,24 @@ from pyglet.math import Mat4
 
 
 class Game:
-    def __init__(self):
+    def __init__(self, resources: str = "base_resources"):
+        pg.resource.location = [resources]
         self.window = pg.window.Window()
         self.camera_pos = pg.math.Vec3(self.window.view[0], self.window.view[5], self.window.view[10])
         self.scale: int = 1
 
         self.objects = []
+        self.batches = {}
         self.global_params = {}
+
+    def add_object(self, object: pg.sprite.Sprite):
+        self.objects.append((object))
+
+    def add_batch(self, batch: pg.graphics.Batch, batch_name: str):
+        if batch_name in self.batches.keys():
+            self.batches[batch]
+        else:
+            print(f"DEBUG: Batch with name: {batch_name} already exists.")
 
     def change_camera_pos(self, x: float = 0, y: float = 0, z: float = 0):
         self.camera_pos += pg.math.Vec3(x, y, z)
@@ -30,3 +41,8 @@ class Game:
     def scale_to_default(self):
         self.window.view = self.window.view.scale(1 / self.scale)
         self.scale = 1
+
+
+game = Game()
+game.objects.append(pg.sprite.Sprite(pg.resource.image("images/circle.png"), 400, 300))
+pg.app.run()
