@@ -1,11 +1,13 @@
 import pyglet as pg
 from pyglet.window import key
 from Game import Game
+from pyglet.math import Mat4
 
 game = Game()
 da_batch = pg.graphics.Batch()
 game.add_batch(da_batch, "foreground")
-game.add_object(pg.sprite.Sprite(pg.resource.image("images/circle.png"), 300, 200, batch=da_batch))
+game.add_object(pg.sprite.Sprite(pg.resource.image("images/circle.png"), 0, 0, batch=da_batch))
+game.add_object(pg.sprite.Sprite(pg.resource.image("images/circle.png"), 1200, 0, batch=da_batch))
 
 scrolling_speed: float = -400
 keys = pg.window.key.KeyStateHandler()
@@ -36,11 +38,14 @@ def on_mouse_scroll(x, y, scroll_x, scroll_y):
         game.set_scale(0.1)
     delta_scale -= game.scale
     width, height = game.window.width, game.window.height
-    print(x, x / width, y, y / height)
-
-    game.change_camera_pos(x * delta_scale / width, y * delta_scale / height)
+    w_point = (0, 0)
+    w_point = (w_point[0] + x / width, w_point[1] + y / height)
+    game.change_camera_pos(width * delta_scale * w_point[0], height * delta_scale * w_point[1])
+    print(game.camera_pos)
+    print(game.window.view)
 
 
 pg.clock.schedule_interval(update, 1 / 60)
-
+# k = Mat4((0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.5, 0, *(0, 0, 0), 1))
+# print(k @ Mat4((1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, *(100, 100, 100), 1)))
 pg.app.run(interval=1/60)

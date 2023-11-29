@@ -35,14 +35,24 @@ class Game:
         else:
             print(f"DEBUG: Batch with name: {batch_name} already exists.")
 
+    def change_camera_view_pos(self, pos: pg.math.Vec3):
+        x, y, z = pos
+
+        self.window.view += Mat4((0, 0, 0, 0,
+                                  0, 0, 0, 0,
+                                  0, 0, 0, 0,
+                                  x, y, z, 0))
+
     def change_camera_pos(self, x: float = 0, y: float = 0, z: float = 0):
         self.camera_pos += pg.math.Vec3(x, y, z)
-        self.window.view = self.window.view.translate(pg.math.Vec3(x, y, z))
+        self.change_camera_view_pos(pg.math.Vec3(x, y, z))
 
     def set_camera_pos(self, x: float = 0, y: float = 0, z: float = 0):
-        self.window.view = self.window.view.translate(-self.camera_pos)
         self.camera_pos = pg.math.Vec3(x, y, z)
-        self.window.view = self.window.view.translate(self.camera_pos)
+        self.window.view = Mat4((0, 0, 0, 0,
+                                  0, 0, 0, 0,
+                                  0, 0, 0, 0,
+                                  x, y, z, 0))
 
     def add_scale(self, n):
         self.scale += n
@@ -58,13 +68,8 @@ class Game:
     def set_scale(self, n):
         self.window.view = Mat4().scale(pg.math.Vec3(n, n, n))
         self.scale = n
+        self.change_camera_view_pos(self.camera_pos)
 
     def scale_to_default(self):
         self.window.view = self.window.view.scale(1 / self.scale)
         self.scale = 1
-
-
-
-
-
-
