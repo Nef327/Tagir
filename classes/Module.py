@@ -1,6 +1,9 @@
 class Module:
-    def __init__(self, *args, **kwargs):
-        pass
+    def __init__(self, g_object, *args, **kwargs):
+        self.object = g_object
+
+    def object(self, g_object):
+        self.object = g_object
 
     def update(self, dt: float):
         pass

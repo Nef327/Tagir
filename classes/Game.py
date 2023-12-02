@@ -1,6 +1,5 @@
 import pyglet as pg
 from classes.CameraGroup import CenteredCameraGroup
-from pyglet.math import Mat4
 
 
 class Game:
