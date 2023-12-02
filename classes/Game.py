@@ -8,7 +8,7 @@ class Game:
         pg.resource.path = [resources]
         self.window = pg.window.Window()
 
-        self.camera = CenteredCameraGroup(self.window, 0,0)
+        self.camera = CenteredCameraGroup(self.window, self, 0, 0)
 
         self.objects = []
         self.batches = {}
@@ -56,3 +56,7 @@ class Game:
 
     def scale_to_default(self):
         self.camera.zoom = 1
+
+    def update(self, dt: float):
+        for object in self.objects:
+            object.update_modules(dt)

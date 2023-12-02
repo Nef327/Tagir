@@ -37,6 +37,4 @@ def on_mouse_scroll(x, y, scroll_x, scroll_y):
 
 
 pg.clock.schedule_interval(update, 1 / 60)
-# k = Mat4((0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.5, 0, *(0, 0, 0), 1))
-# print(k @ Mat4((1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, *(100, 100, 100), 1)))
 pg.app.run(interval=1/60)

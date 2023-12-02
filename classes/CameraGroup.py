@@ -5,12 +5,13 @@ from pyglet.math import Mat4, Vec2
 class CameraGroup(Group):
     """ Graphics group emulating the behaviour of a camera in 2D space. """
 
-    def __init__(self, window, x, y, zoom=1.0, order=0, parent=None):
+    def __init__(self, window, game, x, y, zoom=1.0, order=0, parent=None):
         super().__init__(order, parent)
         self._window = window
         self.x = x
         self.y = y
         self.zoom = zoom
+        self.game = game
 
     @property
     def position(self) -> Vec2:
