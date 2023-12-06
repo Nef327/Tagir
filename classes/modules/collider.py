@@ -8,7 +8,7 @@ class CollisionManager(Module):
         colliders = [obj.find_modules("ColliderGroup") for obj in self.object.group.game.objects]
 
 
-class ColliderGroup():
+class ColliderGroup(Module):
     def __init__(self, g_object, *args, **kwargs):
         super().__init__(g_object, *args, **kwargs)
         self.group = []
