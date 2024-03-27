@@ -1,8 +1,6 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout
 
 
-class InspectorWidget(QWidget):
+class HierarchyWidget(QWidget):
     def __init__(self, *args, **kwargs):
-        super(InspectorWidget, self).__init__(*args, **kwargs)
-
-
+        super(HierarchyWidget, self).__init__(*args, **kwargs)
